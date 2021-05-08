@@ -145,7 +145,7 @@ This ELK server is configured to monitor the following machines:
 
 We have installed the following Beats on these machines:
 - Metricbeat 
-- Filebeat - to monitor the file systems on the Web VMs. This allows us to see SSH Logins, escalation attempts, sudo commands, etc.
+- Filebeat 
 
 These Beats allow us to collect the following information from each machine:
 - Metricbeat installation allows us to monitor the metrics of each machine, such as CPU Usage, Memory usage, number of containers on each machine, and Network IO for each machine and as a whole.
