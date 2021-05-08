@@ -5,8 +5,65 @@ The files in this repository were used to configure the network depicted below.
 ![ELK Stack Project Diagram](https://user-images.githubusercontent.com/76117195/117526217-80657080-af78-11eb-9950-ac4ca8c77d00.jpeg)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+ 
+```
+- name: Configure Elk VM with Docker
+  hosts: elk
+  remote_user: azureuser
+  become: true
+  tasks:
+    # Use apt module
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        name: docker.io
+        state: present
 
-  - _TODO: Enter the playbook file._
+      # Use apt module
+    - name: Install python3-pip
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+      # Use pip module (It will default to pip3)
+    - name: Install Docker module
+      pip:
+        name: docker
+        state: present
+
+      # Use command module
+    - name: Increase virtual memory
+      command: sysctl -w vm.max_map_count=262144
+
+      # Use sysctl module
+    - name: Use more memory
+      sysctl:  
+        name: vm.max_map_count
+        value: '262144'
+        state: present
+        reload: yes
+
+      # Use docker_container module
+    - name: download and launch a docker elk container
+      docker_container:
+        name: elk
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        # Please list the ports that ELK runs on
+        published_ports:
+          -  5601:5601
+          -  9200:9200
+          -  5044:5044
+
+      # Use systemd module
+    - name: Enable service docker on boot
+      systemd:
+        name: docker
+        enabled: yes
+```
 
 This document contains the following details:
 - Description of the Topology
@@ -47,21 +104,22 @@ The machines on the internal network are not exposed to the public Internet.
 Only the Jump Box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - 47.149.52.19
 
-Machines within the Red Virtual network can only be accessed by the Jump Box.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the Red Virtual network can only be accessed by the Jump Box. The ELK Server is only allowed to be accessed by our local machine (47.149.52.19) via port 5601 to give us access to Kibana's web app. 
+
 
 A summary of the access policies in place can be found in the table below.
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Jump Box | Yes                 | 47.149.52.19    |
+| ELK Server| Yes                | 47.149.52.19                      |
+| Web-1        | No              | 10.0.0.1-10.0.255.254                    |
+| Web-2        | No              | 10.0.0.1-10.0.255.254                     |
+| Web-3        | No              | 10.0.0.7-10.0.255.254                     |
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because of a variety of reasons. Firstly, if the files are properly configured it eliminates the possibility of human error. Secondly, it allows us to rapidly scale deployment if necessary and spin up large numbers of this (or similar) machines with proper config files and playbooks
 
 The playbook implements the following tasks:
 - _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
