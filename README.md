@@ -2,8 +2,7 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![ELK Stack Project Diagram](https://user-images.githubusercontent.com/76117195/117484899-8b8ab300-af1c-11eb-8dd5-d96632d06ee8.jpeg)
-
+![ELK Stack Project Diagram](https://user-images.githubusercontent.com/76117195/117526217-80657080-af78-11eb-9950-ac4ca8c77d00.jpeg)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
@@ -28,15 +27,14 @@ The load balances ensure that the incoming traffic is split between all three se
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to their file systems as well as report their system metrics to easily monitor things like resource usage, network IO, escalation failures, and SSH logins. 
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
 | Jump Box | Gateway  | 10.0.0.5   | Linux            |
-| Web-1    |Web Server| 10.0.0.7   | Docker                 |
-| Web-2     |Web Server          | 10.0.0.9           | Docker                 |
-| Web-3     |Web Server    | 10.0.0.11   | Docker                 |
-| ELK-Server     |Monitoring    | 10.2.0.4   | Docker                 |
+| Web-1    |Web Server| 10.0.0.7   | Docker           |
+| Web-2     |Web Server  | 10.0.0.9   | Docker    |
+| Web-3     |Web Server    | 10.0.0.11   | Docker     |
+| ELK-Server     |Monitoring    | 10.2.0.4   | Docker       |
 
 In addition a load balancer has been setup in front of the web servers and dropped them into an availability set:
 
