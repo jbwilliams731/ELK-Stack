@@ -4,7 +4,7 @@ The files in this repository were used to configure the network depicted below.
 
 ![ELK Stack Project Diagram](https://user-images.githubusercontent.com/76117195/117526217-80657080-af78-11eb-9950-ac4ca8c77d00.jpeg)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the elksetup.yml file may be used to install only certain pieces of it, such as Filebeat.
  
 ```
 - name: Configure Elk VM with Docker
@@ -155,13 +155,9 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
-
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- To navigate to the ELK server we must connect via our local machine directly to the ELK public IP and via port 5601. http://20.69.240.232:5601/app/kibana
+- Copy the elksetup.yml playbook file to Ansible container inside /etc/ansible/.
+- Update the hosts file to include the ELK Server's private IP address under a new group of hosts known as [elk]   
+- Run the playbook, and navigate to http://20.69.240.232:5601/app/kibana to check that the installation worked as expected.
+- To navigate to the ELK server we must connect via our local machine directly to the ELK public IP and via port 5601.
 
 
