@@ -122,9 +122,13 @@ A summary of the access policies in place can be found in the table below.
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because of a variety of reasons. Firstly, if the files are properly configured it eliminates the possibility of human error. Secondly, it allows us to rapidly scale deployment if necessary and spin up large numbers of this (or similar) machines with proper config files and playbooks
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Install Docker.io
+- Install Python 3 PIP
+- Use the PIP module to install the docker.io
+- Increase virtual memory
+- Use max memory available
+- Download and launch a docker ELK container from image:sebp/elk761
+- Enable docker on boot
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
