@@ -156,7 +156,54 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 - Copy the elksetup.yml playbook file to Ansible container inside /etc/ansible/.
-- Update the hosts file to include the ELK Server's private IP address under a new group of hosts known as [elk]   
+- Update the hosts file to include the ELK Server's private IP address under a new group of hosts known as [elk] 
+```
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+
+[webservers]
+10.0.0.7 ansible_python_interpreter=/usr/bin/python3
+10.0.0.9 ansible_python_interpreter=/usr/bin/python3
+10.0.0.11 ansible_python_interpreter=/usr/bin/python3
+
+[elk]
+10.2.0.4 ansible_python_interpreter=/usr/bin/python3
+
+# If you have multiple hosts following a pattern you can specify
+# them like this:
+
+## www[001:006].example.com
+
+# Ex 3: A collection of database servers in the 'dbservers' group
+
+## [dbservers]
+## 
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+```
 - Run the playbook, and navigate to http://20.69.240.232:5601/app/kibana to check that the installation worked as expected.
 - To navigate to the ELK server we must connect via our local machine directly to the ELK public IP and via port 5601.
 
